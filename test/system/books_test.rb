@@ -20,7 +20,7 @@ class BooksTest < ApplicationSystemTestCase
     fill_in 'Title', with: @book.title
     click_on 'Create Book'
 
-    assert_text 'Book was successfully created'
+    assert_text t('activerecord.common.message.success_create')
     click_on 'Back'
   end
 

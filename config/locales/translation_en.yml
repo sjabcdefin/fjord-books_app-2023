@@ -9,3 +9,15 @@ en:
         memo: Memo  #g
         picture: Picture  #g
         title: Title  #g
+
+    common:
+      title:
+        books: Books
+        editing_book: Editing Book
+        new_book: New Book
+      action:
+        show: Show this book
+        edit: Edit this book
+        destroy: Destroy this book
+        new_book: New Book
+        back: Back to books

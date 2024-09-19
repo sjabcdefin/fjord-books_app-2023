@@ -9,3 +9,15 @@ ja:
         memo: メモ  #g
         picture: 写真  #g
         title: タイトル  #g
+
+    common:
+      title:
+        books: 本一覧
+        editing_book: 編集
+        new_book: 新規追加
+      action:
+        show: この本を表示する
+        edit: この本を編集する
+        destroy: この本を削除する
+        new_book: 新規追加
+        back: 本一覧に戻る

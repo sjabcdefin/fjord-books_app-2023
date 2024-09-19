@@ -5,8 +5,8 @@
 </div>
 
 <nav class="page-nav">
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %>
+  <%= link_to t('activerecord.common.action.edit'), edit_book_path(@book) %> |
+  <%= link_to t('activerecord.common.action.back'), books_path %>
 
-  <%= button_to "Destroy this book", @book, method: :delete %>
+  <%= button_to t('activerecord.common.action.destroy'), @book, method: :delete %>
 </nav>
