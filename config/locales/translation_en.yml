@@ -15,7 +15,7 @@ en:
         show: Show this book
         edit: Edit this book
         destroy: Destroy this book
-        new_book: New Book
+        new_book: New book
         back: Back to books
       message:
         success_create: Book was successfully created.
