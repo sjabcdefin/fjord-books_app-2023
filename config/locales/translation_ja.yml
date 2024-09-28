@@ -11,10 +11,6 @@ ja:
         title: タイトル  #g
 
     common:
-      title:
-        books: 本一覧
-        editing_book: 編集
-        new_book: 新規追加
       action:
         show: この本を表示する
         edit: この本を編集する
@@ -25,3 +21,11 @@ ja:
         success_create: 本が正常に作成されました。
         success_update: 本が正常に更新されました。
         success_destroy: 本が正常に削除されました。
+
+  books:
+    index:
+      title: 本一覧
+    edit:
+      title: 編集
+    new:
+      title: 新規追加
