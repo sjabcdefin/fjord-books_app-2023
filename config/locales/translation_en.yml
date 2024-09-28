@@ -21,3 +21,7 @@ en:
         destroy: Destroy this book
         new_book: New Book
         back: Back to books
+      message:
+        success_create: Book was successfully created.
+        success_update: Book was successfully updated.
+        success_destroy: Book was successfully destroyed.
