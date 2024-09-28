@@ -10,18 +10,6 @@ en:
         picture: Picture  #g
         title: Title  #g
 
-    common:
-      action:
-        show: Show this book
-        edit: Edit this book
-        destroy: Destroy this book
-        new_book: New book
-        back: Back to books
-      message:
-        success_create: Book was successfully created.
-        success_update: Book was successfully updated.
-        success_destroy: Book was successfully destroyed.
-
   books:
     index:
       title: Books
@@ -29,3 +17,15 @@ en:
       title: Editing Book
     new:
       title: New Book
+
+  action:
+    show: Show this book
+    edit: Edit this book
+    destroy: Destroy this book
+    new_book: New book
+    back: Back to books
+
+  message:
+    success_create: Book was successfully created.
+    success_update: Book was successfully updated.
+    success_destroy: Book was successfully destroyed.

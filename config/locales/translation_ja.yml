@@ -10,18 +10,6 @@ ja:
         picture: 写真  #g
         title: タイトル  #g
 
-    common:
-      action:
-        show: この本を表示する
-        edit: この本を編集する
-        destroy: この本を削除する
-        new_book: 新規追加
-        back: 本一覧に戻る
-      message:
-        success_create: 本が正常に作成されました。
-        success_update: 本が正常に更新されました。
-        success_destroy: 本が正常に削除されました。
-
   books:
     index:
       title: 本一覧
@@ -29,3 +17,15 @@ ja:
       title: 編集
     new:
       title: 新規追加
+
+  action:
+    show: この本を表示する
+    edit: この本を編集する
+    destroy: この本を削除する
+    new_book: 新規追加
+    back: 本一覧に戻る
+
+  message:
+    success_create: 本が正常に作成されました。
+    success_update: 本が正常に更新されました。
+    success_destroy: 本が正常に削除されました。
