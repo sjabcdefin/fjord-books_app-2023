@@ -26,6 +26,6 @@ en:
     back: Back to books
 
   message:
-    success_create: Book was successfully created.
-    success_update: Book was successfully updated.
-    success_destroy: Book was successfully destroyed.
+    success_create: "%{name} was successfully created."
+    success_update: "%{name} was successfully updated."
+    success_destroy: "%{name} was successfully destroyed."

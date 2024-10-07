@@ -26,6 +26,6 @@ ja:
     back: 本一覧に戻る
 
   message:
-    success_create: 本が正常に作成されました。
-    success_update: 本が正常に更新されました。
-    success_destroy: 本が正常に削除されました。
+    success_create: "%{name}が正常に作成されました。"
+    success_update: "%{name}が正常に更新されました。"
+    success_destroy: "%{name}が正常に削除されました。"
