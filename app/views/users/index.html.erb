@@ -2,8 +2,12 @@
 
 <h1>Users</h1>
 
-<div id="users">
+<div id="users" class="index-items">
   <% @users.each do |user| %>
-    <%= render user %>
+    <div class="index-item">
+      <%= render user %>
+    </div>
   <% end %>
 </div>
+
+<%= paginate @users %>
