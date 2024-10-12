@@ -3,5 +3,5 @@
 <%= render @user %>
 
 <div>
-  <%= link_to "Edit this user", edit_user_registration_path(@user) %>
+  <%= link_to t('views.common.edit', name: User.model_name.human.downcase), edit_user_registration_path(@user) %>
 </div>
