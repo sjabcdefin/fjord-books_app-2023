@@ -113,6 +113,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.12.1)
       devise (>= 4.9.0)
+    diff-lcs (1.5.1)
     erb_lint (0.4.0)
       activesupport
       better_html (>= 2.0.1)
@@ -121,6 +122,11 @@ GEM
       rubocop
       smart_properties
     erubi (1.12.0)
+    factory_bot (6.5.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
@@ -245,6 +251,23 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
+    rspec-core (3.13.1)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.0.1)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.1)
     rubocop (1.45.1)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -323,6 +346,7 @@ DEPENDENCIES
   devise
   devise-i18n
   erb_lint
+  factory_bot_rails
   faker
   i18n_generators
   importmap-rails
@@ -331,6 +355,7 @@ DEPENDENCIES
   letter_opener_web
   puma
   rails (~> 7.0.6)
+  rspec-rails
   rubocop (~> 1.45.1)
   rubocop-fjord
   rubocop-rails
