@@ -319,3 +319,46 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
   background-color: var(--global-primary-c-hover);
 }
+
+/****************
+Comment
+****************/
+
+.comment-items {
+  display: block;
+  font-size: var(--global-fz-sm);
+  line-height: var(--global-lh);
+  margin-top: 2em;
+  margin-bottom: var(--nav-mt);
+  border-top: solid var(--global-bw) var(--global-bc);
+}
+
+.comment-item {
+  max-width: var(--single-column-w);
+  display: block;
+  border: solid var(--global-bw) var(--global-bc);
+  padding: 24px;
+  border-radius: var(--global-br);
+  font-size: var(--global-fz-md);
+  line-height: var(--global-lh);
+  margin-top: 1em;
+}
+
+.comment-item p {
+  margin: 0;
+  padding: 1em 0;
+  border-top: solid var(--global-bw) var(--global-bc-muted);
+}
+
+.comment-item p:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.comment-item p:last-child {
+  padding-bottom: 0;
+}
+
+.comment-item p strong {
+  font-size: var(--global-label-fz);
+}

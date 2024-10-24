@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
   before_action :set_report, only: %i[ show edit update destroy ]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :authorize_user!, only: %i[edit, update, destroy]
 
   # GET /reports or /reports.json
   def index
@@ -15,7 +16,7 @@ class ReportsController < ApplicationController
 
   # GET /reports/new
   def new
-    @report = @user.reports.create
+    @report = Report.new
   end
 
   # GET /reports/1/edit
@@ -24,7 +25,8 @@ class ReportsController < ApplicationController
 
   # POST /reports or /reports.json
   def create
-    @report = Report.reports.create(report_params)
+    @report = Report.new(report_params)
+    @report.user = current_user
 
     respond_to do |format|
       if @report.save
@@ -71,12 +73,8 @@ class ReportsController < ApplicationController
       params.require(:report).permit(:title, :text)
     end
 
-    def set_user
-      @user = current_user
-    end
-
     def authorize_user!
-      unless @report.user == @user
+      unless @report.user == current_user
         redirect_to reports_path
       end
     end

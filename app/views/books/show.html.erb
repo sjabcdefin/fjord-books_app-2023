@@ -10,3 +10,17 @@
 
   <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
 </nav>
+
+<div id="comments" class="comment-items">
+  <h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
+
+  <%= render 'comments/form', commentable: @book %>
+
+  <% @comments.each do |comment| %>
+    <div class="comment-item">
+      <%= render 'comments/comment', commentable: @book, comment: comment %>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @comments %>

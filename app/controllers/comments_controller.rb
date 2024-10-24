@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+class CommentsController < ApplicationController
+  before_action :set_commentable, only: %i[ create destroy ]
+  before_action :set_comment, only: :destroy
+  before_action :authorize_user!, only: :destroy
+
+  def create
+    @comment = @commentable.comments.new(comment_params)
+    @comment.user = current_user
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human) }
+      else
+        format.html { redirect_to @commentable, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @comment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human) }
+    end
+  end
+
+  private
+
+  def set_commentable
+    if params[:book_id]
+      @commentable = Book.find(params[:book_id])
+    elsif params[:report_id]
+      @commentable = Report.find(params[:report_id])
+    end
+  end
+
+  def set_comment
+    @comment = @commentable.comments.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:comment)
+  end
+
+  def authorize_user!
+    unless @comment.user == current_user
+      redirect_to @commentable
+    end
+  end
+end
