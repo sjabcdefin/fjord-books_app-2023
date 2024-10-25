@@ -14,3 +14,17 @@
     <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
   <% end %>
 </nav>
+
+<div id="comments" class="comment-items">
+  <h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
+
+  <%= render 'comments/form', commentable: @report %>
+
+  <% @comments.each do |comment| %>
+    <div class="comment-item">
+      <%= render 'comments/comment', commentable: @report, comment: comment %>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @comments %>

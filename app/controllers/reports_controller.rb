@@ -12,6 +12,8 @@ class ReportsController < ApplicationController
 
   # GET /reports/1 or /reports/1.json
   def show
+    @comment = @report.comments.new
+    @comments = @report.comments.order(:id).page(params[:page])
   end
 
   # GET /reports/new
@@ -20,8 +22,7 @@ class ReportsController < ApplicationController
   end
 
   # GET /reports/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reports or /reports.json
   def create
