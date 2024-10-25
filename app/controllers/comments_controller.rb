@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_commentable, only: %i[ create destroy ]
+  before_action :set_commentable, only: %i[create destroy]
   before_action :set_comment, only: :destroy
   before_action :authorize_user!, only: :destroy
 
@@ -45,8 +45,8 @@ class CommentsController < ApplicationController
   end
 
   def authorize_user!
-    unless @comment.user == current_user
-      redirect_to @commentable
-    end
+    return if @comment.user == current_user
+
+    redirect_to @commentable
   end
 end

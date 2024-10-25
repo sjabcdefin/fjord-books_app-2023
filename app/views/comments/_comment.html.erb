@@ -8,12 +8,12 @@
       <%= comment.user.name %>
     <% end %>
   </p>
-  
+
   <p>
     <strong><%= Comment.human_attribute_name(:comment) %>:</strong>
     <%= comment.comment %>
   </p>
-  
+
   <p>
     <strong><%= Comment.human_attribute_name(:created_date) %>:</strong>
     <%= l comment.created_at, format: :long %>
@@ -26,4 +26,3 @@
     <% end %>
   </nav>
 </div>
-  
