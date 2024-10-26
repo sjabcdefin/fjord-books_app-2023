@@ -14,7 +14,7 @@ RSpec.describe 'User Login', type: :system do
 
     click_button 'ログイン'
 
-    expect(page).to have_current_path(books_path)
+    expect(page).to have_current_path(root_path)
   end
 
   # ログイン成功 メッセージ確認

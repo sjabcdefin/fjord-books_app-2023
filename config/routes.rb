@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    passwords: 'users/passwords'
+    sessions: 'users/sessions'
   }
   resources :books
   resources :users

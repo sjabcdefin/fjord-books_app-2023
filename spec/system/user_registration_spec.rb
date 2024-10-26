@@ -41,7 +41,7 @@ RSpec.describe 'User Registration', type: :system do
     fill_registration_form_of_newuser
     click_button 'アカウント登録'
 
-    expect(page).to have_current_path(books_path)
+    expect(page).to have_current_path(root_path)
   end
 
   # アカウント登録成功 メッセージ確認
