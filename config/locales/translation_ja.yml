@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       book: 本
+      user: ユーザ
 
     attributes:
       book:
@@ -9,3 +10,17 @@ ja:
         memo: メモ
         picture: 画像
         title: タイトル
+      user:
+        name: 名前
+        password: パスワード
+        postcode: 郵便番号
+        address: 住所
+        introduction: 自己紹介
+
+  devise:
+    sign_out: ログアウト
+
+  messages:
+    leave_blank: 変更しない場合、空欄のままにしてください。
+    password_min_length: "最低%{count}字以上"
+    need_current_password: パスワードを変更する場合、現在のパスワードを入力してください。
