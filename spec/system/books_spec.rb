@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Operate books after login', type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:users) { FactoryBot.create_list(:user, 3) }
   let!(:book) { FactoryBot.create(:book) }
 
   before do
-    sign_in user
+    sign_in users[0]
   end
 
   # 本の一覧 → 本の新規作成 パス確認

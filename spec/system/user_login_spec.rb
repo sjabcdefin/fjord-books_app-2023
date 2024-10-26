@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'User Login', type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:users) { FactoryBot.create_list(:user, 3) }
 
   # ログイン成功 パス確認
   scenario 'User log in successfully with valid data(path)' do
     visit new_user_session_path
 
-    fill_in 'Eメール', with: user.email
-    fill_in 'パスワード', with: user.password
+    fill_in 'Eメール', with: users[0].email
+    fill_in 'パスワード', with: users[0].password
 
     click_button 'ログイン'
 
@@ -21,8 +21,8 @@ RSpec.describe 'User Login', type: :system do
   scenario 'User log in successfully with valid data(message)' do
     visit new_user_session_path
 
-    fill_in 'Eメール', with: user.email
-    fill_in 'パスワード', with: user.password
+    fill_in 'Eメール', with: users[0].email
+    fill_in 'パスワード', with: users[0].password
 
     click_button 'ログイン'
 
@@ -35,7 +35,7 @@ RSpec.describe 'User Login', type: :system do
     visit new_user_session_path
 
     fill_in 'Eメール', with: 'newuser@example.com'
-    fill_in 'パスワード', with: user.password
+    fill_in 'パスワード', with: users[0].password
 
     click_button 'ログイン'
 
@@ -47,7 +47,7 @@ RSpec.describe 'User Login', type: :system do
     visit new_user_session_path
 
     fill_in 'Eメール', with: 'newuser@example.com'
-    fill_in 'パスワード', with: user.password
+    fill_in 'パスワード', with: users[0].password
 
     click_button 'ログイン'
 
@@ -58,7 +58,7 @@ RSpec.describe 'User Login', type: :system do
   scenario 'User log in fails when password is missing(path)' do
     visit new_user_session_path
 
-    fill_in 'Eメール', with: user.email
+    fill_in 'Eメール', with: users[0].email
     fill_in 'パスワード', with: 'password012'
 
     click_button 'ログイン'
@@ -70,7 +70,7 @@ RSpec.describe 'User Login', type: :system do
   scenario 'User log in fails when password is missing(message)' do
     visit new_user_session_path
 
-    fill_in 'Eメール', with: user.email
+    fill_in 'Eメール', with: users[0].email
     fill_in 'パスワード', with: 'password012'
 
     click_button 'ログイン'

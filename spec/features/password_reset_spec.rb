@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Password Resets', type: :feature do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:users) { FactoryBot.create_list(:user, 3) }
 
   before do
     ActionMailer::Base.deliveries.clear
@@ -11,7 +11,7 @@ RSpec.feature 'Password Resets', type: :feature do
 
   def send_password_reset_mail
     visit new_user_password_path
-    fill_in 'Eメール', with: user.email
+    fill_in 'Eメール', with: users[0].email
     click_button 'パスワードの再設定方法を送信する'
   end
 
@@ -28,7 +28,7 @@ RSpec.feature 'Password Resets', type: :feature do
   end
 
   def fill_in_login_form
-    fill_in 'Eメール', with: user.email
+    fill_in 'Eメール', with: users[0].email
     fill_in 'パスワード', with: 'newpassword123'
     click_button 'ログイン'
   end
@@ -41,7 +41,7 @@ RSpec.feature 'Password Resets', type: :feature do
   scenario 'User confirm reset password mail(1)' do
     send_password_reset_mail
     mail = ActionMailer::Base.deliveries.last
-    expect(mail.to).to include(user.email)
+    expect(mail.to).to include(users[0].email)
   end
 
   scenario 'User confirm reset password mail(2)' do

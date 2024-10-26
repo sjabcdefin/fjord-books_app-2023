@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User Registration', type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:users) { FactoryBot.create_list(:user, 3) }
 
   def fill_registration_form_of_newuser
     fill_in 'Eメール', with: 'newuser@example.com'
@@ -12,9 +12,9 @@ RSpec.describe 'User Registration', type: :system do
   end
 
   def fill_registration_form_of_testuser
-    fill_in 'Eメール', with: user.email
-    fill_in 'パスワード', with: user.password
-    fill_in 'パスワード（確認用）', with: user.password_confirmation
+    fill_in 'Eメール', with: users[0].email
+    fill_in 'パスワード', with: users[0].password
+    fill_in 'パスワード（確認用）', with: users[0].password_confirmation
   end
 
   def fill_registration_form_with_invalid_data

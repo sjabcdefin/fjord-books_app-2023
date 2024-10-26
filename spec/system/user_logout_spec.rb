@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Books management after login', type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:users) { FactoryBot.create_list(:user, 3) }
 
   before do
-    sign_in user
+    sign_in users[0]
   end
 
   # ログアウト　パス確認
