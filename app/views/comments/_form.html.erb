@@ -1,6 +1,6 @@
 <%= form_with(model: [commentable, @comment]) do |form| %>
   <div>
-    <%= form.text_area :comment %>
+    <%= form.text_area :comment, required: true %>
   </div>
 
   <div>

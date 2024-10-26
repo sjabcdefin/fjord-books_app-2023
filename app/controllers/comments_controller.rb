@@ -6,11 +6,10 @@ class CommentsController < ApplicationController
   before_action :authorize_user!, only: :destroy
 
   def create
-    @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
+    @comment = @commentable.comments.create(comment_params.merge(user: current_user))
 
     respond_to do |format|
-      if @comment.save
+      if @comment.persisted?
         format.html { redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human) }
       else
         format.html { redirect_to @commentable, status: :unprocessable_entity }
