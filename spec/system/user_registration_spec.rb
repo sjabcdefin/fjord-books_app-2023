@@ -31,8 +31,8 @@ RSpec.describe 'User Registration', type: :system do
 
   def fill_registration_form_when_password_length_is_wrong
     fill_in 'Eメール', with: 'newuser@example.com'
-    fill_in 'パスワード', with: 'pass'
-    fill_in 'パスワード（確認用）', with: 'pass'
+    fill_in 'パスワード', with: 'passwor'
+    fill_in 'パスワード（確認用）', with: 'passwor'
   end
 
   # アカウント登録成功 パス確認
@@ -108,8 +108,8 @@ RSpec.describe 'User Registration', type: :system do
     expect(page).to have_content 'Eメールを入力してください'
   end
 
-  # パスワードが5文字以下の場合（パス確認）
-  scenario 'User registration fails when password is 5 characters or less(path)' do
+  # パスワードが7文字以下の場合（パス確認）
+  scenario 'User registration fails when password is 7 characters or less(path)' do
     visit new_user_registration_path
     fill_registration_form_when_password_length_is_wrong
     click_button 'アカウント登録'
@@ -117,12 +117,12 @@ RSpec.describe 'User Registration', type: :system do
     expect(page).to have_current_path(new_user_registration_path)
   end
 
-  # パスワードが5文字以下の場合（エラーメッセージの確認）
-  scenario 'User registration fails when password is 5 characters or less(message)' do
+  # パスワードが7文字以下の場合（エラーメッセージの確認）
+  scenario 'User registration fails when password is 7 characters or less(message)' do
     visit new_user_registration_path
     fill_registration_form_when_password_length_is_wrong
     click_button 'アカウント登録'
 
-    expect(page).to have_content 'パスワードは6文字以上で入力してください'
+    expect(page).to have_content 'パスワードは8文字以上で入力してください'
   end
 end

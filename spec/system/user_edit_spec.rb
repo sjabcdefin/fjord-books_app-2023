@@ -110,14 +110,14 @@ RSpec.describe 'Operation after login', type: :system do
     expect(page).to have_content 'Eメールを入力してください'
   end
 
-  # パスワードが5文字以下の場合（パス確認）
+  # パスワードが7文字以下の場合（パス確認）
   def fill_registration_form_when_password_length_is_wrong
-    fill_in 'パスワード', with: 'pass'
-    fill_in 'パスワード（確認用）', with: 'pass'
+    fill_in 'パスワード', with: 'passwor'
+    fill_in 'パスワード（確認用）', with: 'passwor'
     fill_in '現在のパスワード', with: user.password
   end
 
-  scenario 'User edit fails when password is 5 characters or less(path)' do
+  scenario 'User edit fails when password is 7 characters or less(path)' do
     visit edit_user_registration_path(user)
 
     fill_registration_form_when_password_length_is_wrong
@@ -126,13 +126,13 @@ RSpec.describe 'Operation after login', type: :system do
     expect(page).to have_current_path(edit_user_registration_path(user))
   end
 
-  # パスワードが5文字以下の場合（エラーメッセージの確認）
-  scenario 'User edit fails when password is 5 characters or less(message)' do
+  # パスワードが7文字以下の場合（エラーメッセージの確認）
+  scenario 'User edit fails when password is 7 characters or less(message)' do
     visit edit_user_registration_path(user)
 
     fill_registration_form_when_password_length_is_wrong
 
     click_button '更新する'
-    expect(page).to have_content 'パスワードは6文字以上で入力してください'
+    expect(page).to have_content 'パスワードは8文字以上で入力してください'
   end
 end
