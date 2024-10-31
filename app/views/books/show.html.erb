@@ -14,11 +14,17 @@
 <div id="comments" class="comment-items">
   <h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
 
-  <%= render 'comments/form', commentable: @book %>
+  <%= render 'comments/form', commentable: @book, comment: @comment %>
 
-  <% @comments.each do |comment| %>
-    <div class="comment-item">
-      <%= render 'comments/comment', commentable: @book, comment: comment %>
+  <% if @comments.any? %>
+    <% @comments.each do |comment| %>
+      <div class="comment-item">
+        <%= render 'comments/comment', commentable: @book, comment: comment %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="no-comments-message">
+      <p><%= t('views.common.no_comments') %></p>
     </div>
   <% end %>
 </div>

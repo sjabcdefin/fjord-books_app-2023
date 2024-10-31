@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_report, only: %i[show edit update destroy]
   before_action :authorize_user!, only: %i[edit update destroy]
 
@@ -13,7 +12,7 @@ class ReportsController < ApplicationController
   # GET /reports/1
   def show
     @comment = @report.comments.new
-    @comments = @report.comments.order(:id).page(params[:page])
+    @comments = @report.comments.includes(:user).order(:id).page(params[:page])
   end
 
   # GET /reports/new
