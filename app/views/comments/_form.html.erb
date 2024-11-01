@@ -17,5 +17,8 @@
 
   <div>
     <%= form.submit %>
+    <% if params[:inline] %>
+      <%= link_to t('views.common.back', name: i18n_pluralize(Comment.model_name.human.downcase)), polymorphic_path([comment.commentable]), data: { turbo_frame: "_top" } %>
+    <% end %>
   </div>
 <% end %>

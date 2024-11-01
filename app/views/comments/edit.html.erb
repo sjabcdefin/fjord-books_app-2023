@@ -1,0 +1,5 @@
+<% Rails.logger.debug dom_id(@comment, :frame) %>
+
+<%= turbo_frame_tag dom_id(@comment, :frame) do %>
+  <%= render 'comments/form', commentable: @commentable, comment: @comment %>
+<% end %>

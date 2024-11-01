@@ -11,7 +11,16 @@
 
   <p>
     <strong><%= Comment.human_attribute_name(:comment) %>:</strong>
-    <%= comment.comment %>
+    <%= turbo_frame_tag dom_id(comment, :frame) do %>
+      <%= comment.comment %>
+
+      <% if comment.user == current_user %>
+        <nav class="page-nav">
+          <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase),
+          edit_polymorphic_path([comment.commentable, comment], inline: true), data: {turbo_frame: dom_id(comment, :frame)} %>
+        </nav>
+      <% end %>
+    <% end %>
   </p>
 
   <p>
@@ -21,9 +30,6 @@
 
   <nav class="page-nav">
     <% if comment.user == current_user %>
-      <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase),
-      edit_polymorphic_path([comment.commentable, comment]), data: {turbo_frame: dom_id(comment)} %>
-
       <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase),
       polymorphic_path([comment.commentable, comment]), method: :delete %>
     <% end %>
