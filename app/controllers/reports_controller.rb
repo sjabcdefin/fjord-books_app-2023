@@ -9,6 +9,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @mentioning_reports = @report.mentioning_reports
   end
 
   # GET /reports/new
@@ -19,13 +20,14 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    @report = current_user.reports.new(report_params)
-
-    if @report.save
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
-      render :new, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      @report = current_user.reports.new(report_params)
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human) if @report.save && extract_and_save_urls(@report)
     end
+
+    return if @report.persisted?
+
+    render :new, status: :unprocessable_entity
   end
 
   def update
@@ -50,5 +52,15 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :content)
+  end
+
+  def extract_and_save_urls(report)
+    urls = report.content.scan(%r{https?://[^\s]+})
+
+    urls.each do |url|
+      report_id = url.match(%r{reports/(\d+)})[1]
+      mentioned_report = Report.find_by(id: report_id)
+      report.report_mentions.create(mentioned_report:) if mentioned_report && !ReportMention.exists?(mentioning_report: report, mentioned_report:)
+    end
   end
 end

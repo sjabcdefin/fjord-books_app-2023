@@ -1,0 +1,12 @@
+<div class="mentions-container">
+  <% if @mentioning_reports.presence %>
+    <strong><%= t('views.common.title_link', name: Report.model_name.human.downcase) %></strong>
+      <ul>
+        <% @mentioning_reports.each do |mentioning_report| %>
+          <li>
+            <%= link_to mentioning_report.title, report_path(mentioning_report) %>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+</div>
