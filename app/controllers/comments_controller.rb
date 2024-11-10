@@ -8,15 +8,13 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.create(comment_params.merge(user: current_user))
 
-    respond_to do |format|
-      if @comment.persisted?
-        format.html { redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human) }
-      else
-        set_commentable_and_comments
+    if @comment.persisted?
+      redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
+    else
+      set_commentable_and_comments
 
-        action = @commentable.is_a?(Book) ? 'books/show' : 'reports/show'
-        format.html { render action, status: :unprocessable_entity }
-      end
+      action = @commentable.is_a?(Book) ? 'books/show' : 'reports/show'
+      render action, status: :unprocessable_entity
     end
   end
 
@@ -31,9 +29,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    respond_to do |format|
-      format.html { redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human) }
-    end
+    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private
