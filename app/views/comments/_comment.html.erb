@@ -1,0 +1,37 @@
+<div id="<%= dom_id comment %>">
+  <p>
+    <% if comment.user.name.blank? %>
+      <strong><%= User.human_attribute_name(:email) %>:</strong>
+      <%= comment.user.email %>
+    <% else %>
+      <strong><%= User.human_attribute_name(:name) %>:</strong>
+      <%= comment.user.name %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= Comment.human_attribute_name(:comment) %>:</strong>
+    <%= turbo_frame_tag dom_id(comment, :frame) do %>
+      <%= comment.comment %>
+
+      <% if comment.user == current_user %>
+        <nav class="page-nav">
+          <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase),
+          edit_polymorphic_path([comment.commentable, comment], inline: true), data: {turbo_frame: dom_id(comment, :frame)} %>
+        </nav>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= Comment.human_attribute_name(:created_date) %>:</strong>
+    <%= l comment.created_at, format: :long %>
+  </p>
+
+  <nav class="page-nav">
+    <% if comment.user == current_user %>
+      <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase),
+      polymorphic_path([comment.commentable, comment]), method: :delete %>
+    <% end %>
+  </nav>
+</div>

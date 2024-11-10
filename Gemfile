@@ -74,11 +74,14 @@ group :development do
   gem 'rubocop', '~> 1.45.1', require: false
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
 
