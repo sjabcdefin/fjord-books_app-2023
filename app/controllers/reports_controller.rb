@@ -66,7 +66,9 @@ class ReportsController < ApplicationController
     urls.each do |url|
       report_id = url.match(%r{reports/(\d+)})[1]
       mentioned_report = Report.find_by(id: report_id)
-      report.report_mentions.create!(mentioned_report:) if mentioned_report && !ReportMention.exists?(mentioning_report: report, mentioned_report:)
+      report.report_mentions.create!(mentioned_report:) if report_id.to_i != report.id &&
+                                                           mentioned_report &&
+                                                           !ReportMention.exists?(mentioning_report: report, mentioned_report:)
     end
   end
 end
