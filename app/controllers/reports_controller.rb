@@ -37,7 +37,16 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update(report_params)
+    success = false
+
+    ActiveRecord::Base.transaction do
+      @report.update!(report_params)
+      @report.report_mentions.destroy_all
+      extract_and_save_urls(@report)
+      success = true
+    end
+
+    if success
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
