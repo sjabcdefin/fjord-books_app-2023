@@ -20,14 +20,20 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
+    success = false
+    @report = current_user.reports.new(report_params)
+
     ActiveRecord::Base.transaction do
-      @report = current_user.reports.new(report_params)
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human) if @report.save && extract_and_save_urls(@report)
+      @report.save!
+      extract_and_save_urls(@report)
+      success = true
     end
 
-    return if @report.persisted?
-
-    render :new, status: :unprocessable_entity
+    if success
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -60,7 +66,7 @@ class ReportsController < ApplicationController
     urls.each do |url|
       report_id = url.match(%r{reports/(\d+)})[1]
       mentioned_report = Report.find_by(id: report_id)
-      report.report_mentions.create(mentioned_report:) if mentioned_report && !ReportMention.exists?(mentioning_report: report, mentioned_report:)
+      report.report_mentions.create!(mentioned_report:) if mentioned_report && !ReportMention.exists?(mentioning_report: report, mentioned_report:)
     end
   end
 end
