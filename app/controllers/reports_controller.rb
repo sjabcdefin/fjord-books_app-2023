@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       @report.save!
-      extract_and_save_urls(@report)
+      @report.save_mentions
       success = true
     end
 
@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
     ActiveRecord::Base.transaction do
       @report.update!(report_params)
       @report.report_mentions.destroy_all
-      extract_and_save_urls(@report)
+      @report.save_mentions
       success = true
     end
 
@@ -67,17 +67,5 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :content)
-  end
-
-  def extract_and_save_urls(report)
-    urls = report.content.scan(%r{https?://[^\s]+})
-
-    urls.each do |url|
-      report_id = url.match(%r{reports/(\d+)})[1]
-      mentioned_report = Report.find_by(id: report_id)
-      report.report_mentions.create!(mentioned_report:) if report_id.to_i != report.id &&
-                                                           mentioned_report &&
-                                                           !ReportMention.exists?(mentioning_report: report, mentioned_report:)
-    end
   end
 end
