@@ -64,8 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_05_120523) do
     t.integer "mentioned_report_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mentioned_report_id"], name: "index_report_mentions_on_mentioned_report_id"
-    t.index ["mentioning_report_id"], name: "index_report_mentions_on_mentioning_report_id"
+    t.index ["mentioning_report_id", "mentioned_report_id"], name: "index_report_mentions_on_reports", unique: true
   end
 
   create_table "reports", force: :cascade do |t|

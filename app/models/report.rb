@@ -28,8 +28,8 @@ class Report < ApplicationRecord
       report_id = url.match(%r{reports/(\d+)})[1]
       mentioned_report = Report.find_by(id: report_id)
       report_mentions.create!(mentioned_report:) if report_id.to_i != id &&
-                                                           mentioned_report &&
-                                                           !ReportMention.exists?(mentioning_report: self, mentioned_report:)
+                                                    mentioned_report &&
+                                                    !ReportMention.exists?(mentioning_report: self, mentioned_report:)
     end
   end
 end
