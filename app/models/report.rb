@@ -24,12 +24,14 @@ class Report < ApplicationRecord
   def save_mentions
     urls = content.scan(%r{https?://[^\s]+})
 
-    urls.each do |url|
-      report_id = url.match(%r{reports/(\d+)})[1]
-      mentioned_report = Report.find_by(id: report_id)
-      report_mentions.create!(mentioned_report:) if report_id.to_i != id &&
-                                                    mentioned_report &&
-                                                    !ReportMention.exists?(mentioning_report: self, mentioned_report:)
+    report_ids = urls.map { |url| url.match(%r{reports/(\d+)})[1].to_i }
+    valid_report_ids = report_ids.reject { |id| id == self.id }
+
+    mentioned_reports = Report.where(id: valid_report_ids)
+                              .where.not(id: report_mentions.pluck(:mentioned_report_id))
+
+    mentioned_reports.each do |mentioned_report|
+      report_mentions.create!(mentioned_report:)
     end
   end
 end
