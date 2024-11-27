@@ -9,3 +9,8 @@ two:
   user: two
   title: MyString
   content: MyText
+
+three:
+  user: three
+  title: MyString
+  content: MyText
