@@ -20,30 +20,40 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
+    success = false
     @report = current_user.reports.new(report_params)
 
-    begin
-      ActiveRecord::Base.transaction do
-        @report.save!
-        @report.save_mentions
+    ActiveRecord::Base.transaction do
+      if @report.save && @report.save_mentions
+        success = true
+      else
+        raise ActiveRecord::Rollback
       end
+    end
 
+    if success
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    rescue ActiveRecord::RecordInvalid
+    else
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
+    success = false
+
     ActiveRecord::Base.transaction do
-      @report.update!(report_params)
-      @report.report_mentions.destroy_all
-      @report.save_mentions
+      if @report.update(report_params) && @report.report_mentions.destroy_all && @report.save_mentions
+        success = true
+      else
+        raise ActiveRecord::Rollback
+      end
     end
 
-    redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-  rescue ActiveRecord::RecordInvalid
-    render :edit, status: :unprocessable_entity
+    if success
+      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

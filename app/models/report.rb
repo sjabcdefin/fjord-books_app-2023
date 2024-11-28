@@ -31,7 +31,7 @@ class Report < ApplicationRecord
                               .where.not(id: report_mentions.pluck(:mentioned_report_id))
 
     mentioned_reports.each do |mentioned_report|
-      report_mentions.create!(mentioned_report:)
+      report_mentions.create(mentioned_report:)
     end
   end
 end
