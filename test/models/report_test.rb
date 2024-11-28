@@ -11,12 +11,12 @@ class ReportTest < ActiveSupport::TestCase
 
   # ログインユーザと日報作成ユーザが同一の場合、trueを返す
   test 'should return true when the log-in user is the report author' do
-    assert_equal true, @newyear_report.editable?(users(:one))
+    assert_equal true, @newyear_report.editable?(users(:alice))
   end
 
   # ログインユーザと日報作成ユーザが異なる場合、falseを返す
   test 'should return false when the log-in user is not the report author' do
-    assert_equal false, @newyear_report.editable?(users(:two))
+    assert_equal false, @newyear_report.editable?(users(:bob))
   end
 
   # タイムスタンプをDateオブジェクトに変換する

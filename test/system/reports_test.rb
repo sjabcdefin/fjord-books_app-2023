@@ -36,7 +36,7 @@ class ReportsTest < ApplicationSystemTestCase
     visit report_url(@report)
     click_on 'この日報を編集'
 
-    fill_in 'タイトル', with:'Merry Christmas'
+    fill_in 'タイトル', with: 'Merry Christmas'
     fill_in '内容', with: 'I received a present from Santa.'
     click_on '更新する'
 
