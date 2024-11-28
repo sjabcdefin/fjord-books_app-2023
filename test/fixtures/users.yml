@@ -6,16 +6,16 @@
 #
 
 one:
-  name: one
+  name: Alice
   email: ''
-  encrypted_password: password
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 two:
   name: ''
-  email: two@example.com
-  encrypted_password: password
+  email: bob@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 three:
-  name: three
-  email: three@example.com
-  encrypted_password: password
+  name: Carol
+  email: carol@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
