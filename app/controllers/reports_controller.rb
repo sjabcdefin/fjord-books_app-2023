@@ -24,11 +24,9 @@ class ReportsController < ApplicationController
     @report = current_user.reports.new(report_params)
 
     ActiveRecord::Base.transaction do
-      if @report.save && @report.save_mentions
-        success = true
-      else
-        raise ActiveRecord::Rollback
-      end
+      raise ActiveRecord::Rollback unless @report.save && @report.save_mentions
+
+      success = true
     end
 
     if success
@@ -42,11 +40,9 @@ class ReportsController < ApplicationController
     success = false
 
     ActiveRecord::Base.transaction do
-      if @report.update(report_params) && @report.report_mentions.destroy_all && @report.save_mentions
-        success = true
-      else
-        raise ActiveRecord::Rollback
-      end
+      raise ActiveRecord::Rollback unless @report.update(report_params) && @report.report_mentions.destroy_all && @report.save_mentions
+
+      success = true
     end
 
     if success
