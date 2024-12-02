@@ -1,11 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  title: MyString
-  content: MyText
+newyear:
+  user_id: 1
+  title: Happy New Year
+  content: I received New Year's gift from my grandparents.
 
-two:
-  user: two
-  title: MyString
-  content: MyText
+valentine:
+  user_id: 2
+  title: Happy Valentine's day
+  content: I received chocolate from a friend of mine.
+
+vacation:
+  user_id: 3
+  title: Summer Vacation Start
+  content: I have a lot of homework.
